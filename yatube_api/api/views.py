@@ -8,7 +8,7 @@ from rest_framework.pagination import LimitOffsetPagination
 
 from posts.models import Post, Group, Comment, Follow
 from .permissions import IsAuthorOrReadOnly, FollowPermission
-from .viewsets import CreateListMixinViewSet
+from .mixins import CreateListMixinViewSet
 from . import serializers
 
 
@@ -26,13 +26,6 @@ class PostViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-    def perform_update(self, serializer):
-        serializer.save(author=self.request.user)
-
-    def perform_destroy(self, instance):
-        if instance.author == self.request.user:
-            instance.delete()
-
 
 class CommentViewSet(ModelViewSet):
     serializer_class = serializers.CommentSerializer
@@ -46,13 +39,6 @@ class CommentViewSet(ModelViewSet):
     def perform_create(self, serializer):
         post = get_object_or_404(Post, id=self.kwargs.get("post_id"))
         serializer.save(author=self.request.user, post=post)
-
-    def perform_update(self, serializer):
-        serializer.save(author=self.request.user)
-
-    def perform_destroy(self, instance):
-        if instance.author == self.request.user:
-            instance.delete()
 
 
 class FollowViewSet(CreateListMixinViewSet):
