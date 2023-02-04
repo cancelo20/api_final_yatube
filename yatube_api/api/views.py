@@ -2,10 +2,11 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (
+    IsAuthenticated, IsAuthenticatedOrReadOnly)
 from rest_framework.pagination import LimitOffsetPagination
 
-from posts.models import Post, Group, Comment, Follow, User
+from posts.models import Post, Group, Comment, Follow
 from .permissions import IsAuthorOrReadOnly, FollowPermission
 from .viewsets import CreateListMixinViewSet
 from . import serializers
