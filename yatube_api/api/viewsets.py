@@ -3,5 +3,5 @@ from rest_framework.viewsets import GenericViewSet
 
 
 class CreateListMixinViewSet(
-    CreateModelMixin, ListModelMixin, GenericViewSet):
+        CreateModelMixin, ListModelMixin, GenericViewSet):
     pass
