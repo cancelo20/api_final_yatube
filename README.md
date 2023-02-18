@@ -17,3 +17,7 @@ python manage.py migrate
 Запустить проект:
 
 python manage.py runserver
+
+или
+
+pthon3 manage.py runserver
